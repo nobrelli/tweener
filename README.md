@@ -18,7 +18,7 @@ Tween(begin, end, duration, easing, easing_mode, boomerang, loop, reps)
 | `end`     | `float`  | The end value of a property (default: `1.0`)        |
 | `duration`| `int`    | The length of time that an animation takes to complete (default: `600 ms`) |
 | `easing`  | `Easing` | The type of easing to apply. (default: `Easing.LINEAR`) |
-| `easing_mode | `EasingMode` | The mode of easing `IN`, `OUT`, `IN_OUT`, (default: `None`) |
+| `easing_mode` | `EasingMode` | The mode of easing `IN`, `OUT`, `IN_OUT`, (default: `None`) |
 | `boomerang` | `bool` | Returns the animation back to its starting point and vice versa. (default: `False`) |
 | `loop`    | `bool`  | Loops the animation. When used with `boomerang`, it does the back and forth animation. (default: `False`) |
 | `reps`  | `int` | Number of times the animation will be repeated. Zero means infinite. (default: `0`) |
