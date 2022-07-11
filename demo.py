@@ -1,5 +1,5 @@
 import pygame as pg
-from tweener.tween import Tween, Easing, EasingMode
+from tween import Tween, Easing, EasingMode
 
 WIDTH = 600
 HEIGHT = 600
