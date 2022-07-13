@@ -55,7 +55,7 @@ class Tween:
         self._step = 0
 
         # Determine which function to use
-        self._ease = Easing.LINEAR
+        self._ease = None
         self._eval_func()
 
     def _eval_func(self):
