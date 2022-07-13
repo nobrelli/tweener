@@ -1,6 +1,7 @@
 import time
 from enum import Enum, auto
 from ease import Ease
+from collections.abc import Callable
 
 
 class Easing(Enum):
@@ -55,7 +56,7 @@ class Tween:
         self._step = 0
 
         # Determine which function to use
-        self._ease = None
+        self._ease: Callable
         self._eval_func()
 
     def _eval_func(self):
