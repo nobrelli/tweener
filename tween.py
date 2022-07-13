@@ -28,7 +28,7 @@ class Tween:
                  begin: float = 0.0, end: float = 1.0,
                  duration: int = 600,
                  easing: Easing = Easing.LINEAR,
-                 easing_mode: EasingMode = None,
+                 easing_mode: EasingMode = EasingMode.IN,
                  boomerang: bool = False,
                  loop: bool = False,
                  reps: int = 0):
