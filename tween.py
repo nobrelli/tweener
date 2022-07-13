@@ -56,7 +56,7 @@ class Tween:
         self._step = 0
 
         # Determine which function to use
-        self._ease: Callable
+        self._ease: Callable[[float], float]
         self._eval_func()
 
     def _eval_func(self):
