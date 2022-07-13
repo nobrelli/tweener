@@ -25,13 +25,13 @@ class EasingMode(Enum):
 
 class Tween:
     def __init__(self,
-                 begin=0.0, end=1.0,
-                 duration=600.0,
-                 easing=Easing.LINEAR,
-                 easing_mode=None,
-                 boomerang=False,
-                 loop=False,
-                 reps=0):
+                 begin: float = 0.0, end: float = 1.0,
+                 duration: int = 600,
+                 easing: Easing = Easing.LINEAR,
+                 easing_mode: EasingMode = None,
+                 boomerang: bool = False,
+                 loop: bool = False,
+                 reps: int = 0):
 
         self._begin = begin
         self._origin = begin
@@ -55,7 +55,7 @@ class Tween:
         self._step = 0
 
         # Determine which function to use
-        self._ease = None
+        self._ease = Easing.LINEAR
         self._eval_func()
 
     def _eval_func(self):
