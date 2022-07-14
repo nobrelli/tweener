@@ -1,4 +1,5 @@
 import math
+from typing import Union, NewType
 
 PI = math.pi
 TAU = math.tau
@@ -8,17 +9,19 @@ class Ease2:
     """
     Easing equations by Robert Penner
 
-    * step - the current time/step of the animation
+    * step - The current time/step of the animation. Domain: **[0.0-1.0]**
     * start - the starting value of the property
     * delta - the amount of change between the start and end values, i.e. (end - start)
     * duration - the total the length of time that an animation takes to complete
+    **Returns** a value from range **[0.0-1.0]**
     """
+    Number = NewType('Number', Union[int, float])
     
     #############################################################
     # LINEAR
     #############################################################
     @staticmethod
-    def linear(step, start, delta, duration):
+    def linear(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * step + start
 
@@ -26,19 +29,19 @@ class Ease2:
     # SINUSOIDAL
     #############################################################
     @staticmethod
-    def in_sine(step, start, delta, duration):
+    def in_sine(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         if step == 1.0:
             return start + delta
         return delta * (1 - math.cos(step * (PI / 2))) + start
 
     @staticmethod
-    def out_sine(step, start, delta, duration):
+    def out_sine(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.sin(step * (PI / 2)) + start
 
     @staticmethod
-    def in_out_sine(step, start, delta, duration):
+    def in_out_sine(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta / 2 * (1 - math.cos(PI * step)) + start
 
@@ -46,17 +49,17 @@ class Ease2:
     # QUADRATIC
     #############################################################
     @staticmethod
-    def in_quad(step, start, delta, duration):
+    def in_quad(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.pow(step, 2) + start
 
     @staticmethod
-    def out_quad(step, start, delta, duration):
+    def out_quad(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return -delta * step * (step - 2) + start
 
     @staticmethod
-    def in_out_quad(step, start, delta, duration):
+    def in_out_quad(step: float, start: Number, delta: Number, duration: int) -> float:
         step /= duration / 2
         if step < 1:
             return delta / 2 * math.pow(step, 2) + start
@@ -68,17 +71,17 @@ class Ease2:
     # CUBIC
     #############################################################
     @staticmethod
-    def in_cubic(step, start, delta, duration):
+    def in_cubic(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.pow(step, 3) + start
 
     @staticmethod
-    def out_cubic(step, start, delta, duration):
+    def out_cubic(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * (math.pow(step - 1, 3) + 1) + start
 
     @staticmethod
-    def in_out_cubic(step, start, delta, duration):
+    def in_out_cubic(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / (duration / 2), 2.0)
         if step < 1:
             return delta / 2 * math.pow(step, 3) + start
@@ -89,17 +92,17 @@ class Ease2:
     # QUARTIC
     #############################################################
     @staticmethod
-    def in_quart(step, start, delta, duration):
+    def in_quart(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.pow(step, 4) + start
 
     @staticmethod
-    def out_quart(step, start, delta, duration):
+    def out_quart(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return -delta * (math.pow(step - 1, 4) - 1) + start
 
     @staticmethod
-    def in_out_quart(step, start, delta, duration):
+    def in_out_quart(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / (duration / 2), 2.0)
         if step < 1:
             return delta / 2 * math.pow(step, 4) + start
@@ -110,17 +113,17 @@ class Ease2:
     # QUINTIC
     #############################################################
     @staticmethod
-    def in_quint(step, start, delta, duration):
+    def in_quint(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.pow(step, 5) + start
 
     @staticmethod
-    def out_quint(step, start, delta, duration):
+    def out_quint(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * (math.pow(step - 1, 5) + 1) + start
 
     @staticmethod
-    def in_out_quint(step, start, delta, duration):
+    def in_out_quint(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / (duration / 2), 2.0)
         if step < 1:
             return delta / 2 * math.pow(step, 5) + start
@@ -131,19 +134,19 @@ class Ease2:
     # EXPONENTIAL
     #############################################################
     @staticmethod
-    def in_expo(step, start, delta, duration):
+    def in_expo(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.pow(2, 10 * (step - 1)) + start
 
     @staticmethod
-    def out_expo(step, start, delta, duration):
+    def out_expo(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         if step == 1.0:
             return start + delta
         return delta * (1 - math.pow(2, -10 * step)) + start
 
     @staticmethod
-    def in_out_expo(step, start, delta, duration):
+    def in_out_expo(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / (duration / 2), 2.0)
         if step == 0.0:
             return start
@@ -158,17 +161,17 @@ class Ease2:
     # CIRCULAR
     #############################################################
     @staticmethod
-    def in_circ(step, start, delta, duration):
+    def in_circ(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return -delta * (math.sqrt(1 - math.pow(step, 2)) - 1) + start
 
     @staticmethod
-    def out_circ(step, start, delta, duration):
+    def out_circ(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
         return delta * math.sqrt(1 - math.pow(step - 1, 2)) + start
 
     @staticmethod
-    def in_out_circ(step, start, delta, duration):
+    def in_out_circ(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / (duration / 2), 2.0)
         if step < 1:
             return delta / 2 * (1 - math.sqrt(1 - math.pow(step, 2))) + start
@@ -181,7 +184,7 @@ class Ease2:
     # P.S. The original link is dead :(
     #############################################################################
     @staticmethod
-    def in_back(step, start, delta, duration):
+    def in_back(step: float, start: Number, delta: Number, duration: int) -> float:
         C1 = 1.70158
         step = min(step / duration, 1.0)
         if step == 1.0:
@@ -189,7 +192,7 @@ class Ease2:
         return delta * math.pow(step, 2) * ((C1 + 1) * step - C1) + start
 
     @staticmethod
-    def out_back(step, start, delta, duration):
+    def out_back(step: float, start: Number, delta: Number, duration: int) -> float:
         C1 = 1.70158
         step = min(step / duration, 1.0)
         if step == 1.0:
@@ -197,7 +200,7 @@ class Ease2:
         return delta * (math.pow(step - 1, 2) * ((C1 + 1) * (step - 1) + C1) + 1) + start
 
     @staticmethod
-    def in_out_back(step, start, delta, duration):
+    def in_out_back(step: float, start: Number, delta: Number, duration: int) -> float:
         C2 = 2.5949095
         step = min(step / (duration / 2), 2.0)
 
@@ -208,7 +211,7 @@ class Ease2:
         return delta / 2 * (step * step * ((C2 + 1) * step + C2) + 2) + start
 
     @staticmethod
-    def in_elastic(step, start, delta, duration):
+    def in_elastic(step: float, start: Number, delta: Number, duration: int) -> float:
         s = 1.70158
         p, a = 0, delta
 
@@ -232,7 +235,7 @@ class Ease2:
         return -(a * math.pow(2, 10 * step) * math.sin((step * duration - s) * TAU / p)) + start
 
     @staticmethod
-    def out_elastic(step, start, delta, duration):
+    def out_elastic(step: float, start: Number, delta: Number, duration: int) -> float:
         s = 1.70158
         p, a = 0, delta
 
@@ -255,7 +258,7 @@ class Ease2:
         return a * math.pow(2, -10 * step) * math.sin((step * duration - s) * TAU / p) + delta + start
 
     @staticmethod
-    def in_out_elastic(step, start, delta, duration):
+    def in_out_elastic(step: float, start: Number, delta: Number, duration: int) -> float:
         s = 1.70158
         p, a = 0, delta
 
@@ -283,11 +286,11 @@ class Ease2:
         return a * math.pow(2, -10 * step) * math.sin((step * duration - s) * TAU / p) * .5 + delta + start
 
     @staticmethod
-    def in_bounce(step, start, delta, duration):
+    def in_bounce(step: float, start: Number, delta: Number, duration: int) -> float:
         return delta - Ease2.out_bounce(duration - step, 0, delta, duration) + start
 
     @staticmethod
-    def out_bounce(step, start, delta, duration):
+    def out_bounce(step: float, start: Number, delta: Number, duration: int) -> float:
         step = min(step / duration, 1.0)
 
         if step < 0.0:
@@ -303,7 +306,7 @@ class Ease2:
             return delta * (7.5625 * math.pow(step - (2.625 / 2.75), 2) + .984375) + start
 
     @staticmethod
-    def in_out_bounce(step, start, delta, duration):
+    def in_out_bounce(step: float, start: Number, delta: Number, duration: int) -> float:
         if step < duration / 2:
             return Ease2.in_bounce(step * 2, 0, delta, duration) * .5 + start
         return Ease2.out_bounce(step * 2 - duration, 0, delta, duration) * .5 + delta * .5 + start
