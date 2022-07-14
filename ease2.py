@@ -5,167 +5,175 @@ TAU = math.tau
 
 
 class Ease2:
-    """Easing equations by Robert Penner"""
+    """
+    Easing equations by Robert Penner
+
+    * step - the current time/step of the animation
+    * start - the starting value of the property
+    * delta - the amount of change between the start and end values, i.e. (end - start)
+    * duration - the total the length of time that an animation takes to complete
+    """
+    
     #############################################################
     # LINEAR
     #############################################################
     @staticmethod
-    def linear(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * t + b
+    def linear(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * step + start
 
     #############################################################
     # SINUSOIDAL
     #############################################################
     @staticmethod
-    def in_sine(t, b, c, d):
-        t = min(t / d, 1.0)
-        if t == 1.0:
-            return b + c
-        return c * (1 - math.cos(t * (PI / 2))) + b
+    def in_sine(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        if step == 1.0:
+            return start + delta
+        return delta * (1 - math.cos(step * (PI / 2))) + start
 
     @staticmethod
-    def out_sine(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.sin(t * (PI / 2)) + b
+    def out_sine(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.sin(step * (PI / 2)) + start
 
     @staticmethod
-    def in_out_sine(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c / 2 * (1 - math.cos(PI * t)) + b
+    def in_out_sine(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta / 2 * (1 - math.cos(PI * step)) + start
 
     #############################################################
     # QUADRATIC
     #############################################################
     @staticmethod
-    def in_quad(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.pow(t, 2) + b
+    def in_quad(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.pow(step, 2) + start
 
     @staticmethod
-    def out_quad(t, b, c, d):
-        t = min(t / d, 1.0)
-        return -c * t * (t - 2) + b
+    def out_quad(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return -delta * step * (step - 2) + start
 
     @staticmethod
-    def in_out_quad(t, b, c, d):
-        t /= d / 2
-        if t < 1:
-            return c / 2 * math.pow(t, 2) + b
+    def in_out_quad(step, start, delta, duration):
+        step /= duration / 2
+        if step < 1:
+            return delta / 2 * math.pow(step, 2) + start
 
-        t = min(t - 1, 1.0)
-        return -c / 2 * (t * (t - 2) - 1) + b
+        step = min(step - 1, 1.0)
+        return -delta / 2 * (step * (step - 2) - 1) + start
 
     #############################################################
     # CUBIC
     #############################################################
     @staticmethod
-    def in_cubic(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.pow(t, 3) + b
+    def in_cubic(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.pow(step, 3) + start
 
     @staticmethod
-    def out_cubic(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * (math.pow(t - 1, 3) + 1) + b
+    def out_cubic(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * (math.pow(step - 1, 3) + 1) + start
 
     @staticmethod
-    def in_out_cubic(t, b, c, d):
-        t = min(t / (d / 2), 2.0)
-        if t < 1:
-            return c / 2 * math.pow(t, 3) + b
+    def in_out_cubic(step, start, delta, duration):
+        step = min(step / (duration / 2), 2.0)
+        if step < 1:
+            return delta / 2 * math.pow(step, 3) + start
 
-        return c / 2 * (math.pow(t - 2, 3) + 2) + b
+        return delta / 2 * (math.pow(step - 2, 3) + 2) + start
 
     #############################################################
     # QUARTIC
     #############################################################
     @staticmethod
-    def in_quart(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.pow(t, 4) + b
+    def in_quart(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.pow(step, 4) + start
 
     @staticmethod
-    def out_quart(t, b, c, d):
-        t = min(t / d, 1.0)
-        return -c * (math.pow(t - 1, 4) - 1) + b
+    def out_quart(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return -delta * (math.pow(step - 1, 4) - 1) + start
 
     @staticmethod
-    def in_out_quart(t, b, c, d):
-        t = min(t / (d / 2), 2.0)
-        if t < 1:
-            return c / 2 * math.pow(t, 4) + b
+    def in_out_quart(step, start, delta, duration):
+        step = min(step / (duration / 2), 2.0)
+        if step < 1:
+            return delta / 2 * math.pow(step, 4) + start
 
-        return -c / 2 * (math.pow(t - 2, 4) - 2) + b
+        return -delta / 2 * (math.pow(step - 2, 4) - 2) + start
 
     #############################################################
     # QUINTIC
     #############################################################
     @staticmethod
-    def in_quint(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.pow(t, 5) + b
+    def in_quint(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.pow(step, 5) + start
 
     @staticmethod
-    def out_quint(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * (math.pow(t - 1, 5) + 1) + b
+    def out_quint(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * (math.pow(step - 1, 5) + 1) + start
 
     @staticmethod
-    def in_out_quint(t, b, c, d):
-        t = min(t / (d / 2), 2.0)
-        if t < 1:
-            return c / 2 * math.pow(t, 5) + b
+    def in_out_quint(step, start, delta, duration):
+        step = min(step / (duration / 2), 2.0)
+        if step < 1:
+            return delta / 2 * math.pow(step, 5) + start
 
-        return c / 2 * (math.pow(t - 2, 5) + 2) + b
+        return delta / 2 * (math.pow(step - 2, 5) + 2) + start
 
     #############################################################
     # EXPONENTIAL
     #############################################################
     @staticmethod
-    def in_expo(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.pow(2, 10 * (t - 1)) + b
+    def in_expo(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.pow(2, 10 * (step - 1)) + start
 
     @staticmethod
-    def out_expo(t, b, c, d):
-        t = min(t / d, 1.0)
-        if t == 1.0:
-            return b + c
-        return c * (1 - math.pow(2, -10 * t)) + b
+    def out_expo(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        if step == 1.0:
+            return start + delta
+        return delta * (1 - math.pow(2, -10 * step)) + start
 
     @staticmethod
-    def in_out_expo(t, b, c, d):
-        t = min(t / (d / 2), 2.0)
-        if t == 0.0:
-            return b
-        elif 0.0 < t < 1.0:
-            return c / 2 * math.pow(2, 10 * (t - 1)) + b
-        elif t == 2.0:
-            return b + c
+    def in_out_expo(step, start, delta, duration):
+        step = min(step / (duration / 2), 2.0)
+        if step == 0.0:
+            return start
+        elif 0.0 < step < 1.0:
+            return delta / 2 * math.pow(2, 10 * (step - 1)) + start
+        elif step == 2.0:
+            return start + delta
 
-        return c / 2 * (2 - math.pow(2, -10 * (t - 1))) + b
+        return delta / 2 * (2 - math.pow(2, -10 * (step - 1))) + start
 
     #############################################################
     # CIRCULAR
     #############################################################
     @staticmethod
-    def in_circ(t, b, c, d):
-        t = min(t / d, 1.0)
-        return -c * (math.sqrt(1 - math.pow(t, 2)) - 1) + b
+    def in_circ(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return -delta * (math.sqrt(1 - math.pow(step, 2)) - 1) + start
 
     @staticmethod
-    def out_circ(t, b, c, d):
-        t = min(t / d, 1.0)
-        return c * math.sqrt(1 - math.pow(t - 1, 2)) + b
+    def out_circ(step, start, delta, duration):
+        step = min(step / duration, 1.0)
+        return delta * math.sqrt(1 - math.pow(step - 1, 2)) + start
 
     @staticmethod
-    def in_out_circ(t, b, c, d):
-        t = min(t / (d / 2), 2.0)
-        if t < 1:
-            return c / 2 * (1 - math.sqrt(1 - math.pow(t, 2))) + b
+    def in_out_circ(step, start, delta, duration):
+        step = min(step / (duration / 2), 2.0)
+        if step < 1:
+            return delta / 2 * (1 - math.sqrt(1 - math.pow(step, 2))) + start
 
-        return c / 2 * (math.sqrt(1 - math.pow(t - 2, 2)) + 1) + b
+        return delta / 2 * (math.sqrt(1 - math.pow(step - 2, 2)) + 1) + start
 
     #############################################################################
     # SPECIAL FUNCTIONS
@@ -173,129 +181,129 @@ class Ease2:
     # P.S. The original link is dead :(
     #############################################################################
     @staticmethod
-    def in_back(t, b, c, d):
+    def in_back(step, start, delta, duration):
         C1 = 1.70158
-        t = min(t / d, 1.0)
-        if t == 1.0:
-            return b + c
-        return c * math.pow(t, 2) * ((C1 + 1) * t - C1) + b
+        step = min(step / duration, 1.0)
+        if step == 1.0:
+            return start + delta
+        return delta * math.pow(step, 2) * ((C1 + 1) * step - C1) + start
 
     @staticmethod
-    def out_back(t, b, c, d):
+    def out_back(step, start, delta, duration):
         C1 = 1.70158
-        t = min(t / d, 1.0)
-        if t == 1.0:
-            return b + c
-        return c * (math.pow(t - 1, 2) * ((C1 + 1) * (t - 1) + C1) + 1) + b
+        step = min(step / duration, 1.0)
+        if step == 1.0:
+            return start + delta
+        return delta * (math.pow(step - 1, 2) * ((C1 + 1) * (step - 1) + C1) + 1) + start
 
     @staticmethod
-    def in_out_back(t, b, c, d):
+    def in_out_back(step, start, delta, duration):
         C2 = 2.5949095
-        t = min(t / (d / 2), 2.0)
+        step = min(step / (duration / 2), 2.0)
 
-        if t < 1:
-            return c / 2 * (t * t * ((C2 + 1) * t - C2)) + b
+        if step < 1:
+            return delta / 2 * (step * step * ((C2 + 1) * step - C2)) + start
 
-        t -= 2
-        return c / 2 * (t * t * ((C2 + 1) * t + C2) + 2) + b
+        step -= 2
+        return delta / 2 * (step * step * ((C2 + 1) * step + C2) + 2) + start
 
     @staticmethod
-    def in_elastic(t, b, c, d):
+    def in_elastic(step, start, delta, duration):
         s = 1.70158
-        p, a = 0, c
+        p, a = 0, delta
 
-        if t == 0:
-            return b
+        if step == 0:
+            return start
 
-        t = min(t / d, 1.0)
-        if t == 1:
-            return b + c
+        step = min(step / duration, 1.0)
+        if step == 1:
+            return start + delta
 
         if p == 0:
-            p = d * .3
+            p = duration * .3
 
-        if a < math.fabs(c):
-            a = c
+        if a < math.fabs(delta):
+            a = delta
             s = p / 4
         else:
-            s = p / TAU * math.asin(c / a)
+            s = p / TAU * math.asin(delta / a)
 
-        t -= 1
-        return -(a * math.pow(2, 10 * t) * math.sin((t * d - s) * TAU / p)) + b
+        step -= 1
+        return -(a * math.pow(2, 10 * step) * math.sin((step * duration - s) * TAU / p)) + start
 
     @staticmethod
-    def out_elastic(t, b, c, d):
+    def out_elastic(step, start, delta, duration):
         s = 1.70158
-        p, a = 0, c
+        p, a = 0, delta
 
-        if t == 0:
-            return b
+        if step == 0:
+            return start
 
-        t = min(t / d, 1.0)
-        if t == 1:
-            return b + c
+        step = min(step / duration, 1.0)
+        if step == 1:
+            return start + delta
 
         if p == 0:
-            p = d * .3
+            p = duration * .3
 
-        if a < math.fabs(c):
-            a = c
+        if a < math.fabs(delta):
+            a = delta
             s = p / 4
         else:
-            s = p / TAU * math.asin(c / a)
+            s = p / TAU * math.asin(delta / a)
 
-        return a * math.pow(2, -10 * t) * math.sin((t * d - s) * TAU / p) + c + b
+        return a * math.pow(2, -10 * step) * math.sin((step * duration - s) * TAU / p) + delta + start
 
     @staticmethod
-    def in_out_elastic(t, b, c, d):
+    def in_out_elastic(step, start, delta, duration):
         s = 1.70158
-        p, a = 0, c
+        p, a = 0, delta
 
-        if t == 0:
-            return b
+        if step == 0:
+            return start
 
-        t = min(t / (d / 2), 2.0)
-        if t == 2:
-            return b + c
+        step = min(step / (duration / 2), 2.0)
+        if step == 2:
+            return start + delta
 
         if p == 0:
-            p = d * .3 * 1.5
+            p = duration * .3 * 1.5
 
-        if a < math.fabs(c):
-            a = c
+        if a < math.fabs(delta):
+            a = delta
             s = p / 4
         else:
-            s = p / TAU * math.asin(c / a)
+            s = p / TAU * math.asin(delta / a)
 
-        if t < 1:
-            t -= 1
-            return -.5 * a * math.pow(2, 10 * t) * math.sin((t * d - s) * TAU / p) + b
+        if step < 1:
+            step -= 1
+            return -.5 * a * math.pow(2, 10 * step) * math.sin((step * duration - s) * TAU / p) + start
 
-        t -= 1
-        return a * math.pow(2, -10 * t) * math.sin((t * d - s) * TAU / p) * .5 + c + b
-
-    @staticmethod
-    def in_bounce(t, b, c, d):
-        return c - Ease2.out_bounce(d - t, 0, c, d) + b
+        step -= 1
+        return a * math.pow(2, -10 * step) * math.sin((step * duration - s) * TAU / p) * .5 + delta + start
 
     @staticmethod
-    def out_bounce(t, b, c, d):
-        t = min(t / d, 1.0)
+    def in_bounce(step, start, delta, duration):
+        return delta - Ease2.out_bounce(duration - step, 0, delta, duration) + start
 
-        if t < 0.0:
-            t = 0.0
+    @staticmethod
+    def out_bounce(step, start, delta, duration):
+        step = min(step / duration, 1.0)
 
-        if t < (1 / 2.75):
-            return c * (7.5625 * math.pow(t, 2)) + b
-        elif t < (2 / 2.75):
-            return c * (7.5625 * math.pow(t - (1.5 / 2.75), 2) + .75) + b
-        elif t < (2.5 / 2.75):
-            return c * (7.5625 * math.pow(t - (2.25 / 2.75), 2) + .9375) + b
+        if step < 0.0:
+            step = 0.0
+
+        if step < (1 / 2.75):
+            return delta * (7.5625 * math.pow(step, 2)) + start
+        elif step < (2 / 2.75):
+            return delta * (7.5625 * math.pow(step - (1.5 / 2.75), 2) + .75) + start
+        elif step < (2.5 / 2.75):
+            return delta * (7.5625 * math.pow(step - (2.25 / 2.75), 2) + .9375) + start
         else:
-            return c * (7.5625 * math.pow(t - (2.625 / 2.75), 2) + .984375) + b
+            return delta * (7.5625 * math.pow(step - (2.625 / 2.75), 2) + .984375) + start
 
     @staticmethod
-    def in_out_bounce(t, b, c, d):
-        if t < d / 2:
-            return Ease2.in_bounce(t * 2, 0, c, d) * .5 + b
-        return Ease2.out_bounce(t * 2 - d, 0, c, d) * .5 + c * .5 + b
+    def in_out_bounce(step, start, delta, duration):
+        if step < duration / 2:
+            return Ease2.in_bounce(step * 2, 0, delta, duration) * .5 + start
+        return Ease2.out_bounce(step * 2 - duration, 0, delta, duration) * .5 + delta * .5 + start
